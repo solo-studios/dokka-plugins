@@ -2,7 +2,7 @@
  * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of dokka-plugins
- * Last modified on 15-09-2023 09:48 p.m.
+ * Last modified on 15-09-2023 10:05 p.m.
  *
  * MIT License
  *
@@ -56,8 +56,6 @@ kotlin {
 
 dependencies {
     implementation(libs.dokka.base)
-
-    implementation("ca.solo-studios:dokka-script-plugin:0.1.0-SNAPSHOT")
 
     implementation(gradlePlugin(libs.plugins.dokka, libs.versions.dokka))
     implementation(gradlePlugin(libs.plugins.kotlin.jvm, libs.versions.kotlin))
