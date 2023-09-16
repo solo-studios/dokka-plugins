@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file build.gradle.kts is part of DokkaScriptPlugin
- * Last modified on 14-09-2023 02:36 p.m.
+ * The file build.gradle.kts is part of dokka-plugins
+ * Last modified on 15-09-2023 09:46 p.m.
  *
  * MIT License
  *

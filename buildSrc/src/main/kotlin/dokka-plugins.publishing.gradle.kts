@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file dokka-plugins.publishing.gradle.kts is part of DokkaScriptPlugin
- * Last modified on 14-09-2023 02:35 p.m.
+ * The file dokka-plugins.publishing.gradle.kts is part of dokka-plugins
+ * Last modified on 15-09-2023 09:47 p.m.
  *
  * MIT License
  *
@@ -32,7 +32,9 @@ plugins {
 
 afterEvaluate {
     publishing {
-        publications.withType<MavenPublication>().configureEach {
+        publications.create<MavenPublication>("maven") {
+            from(components["java"])
+
             val projectName = project.name.formatAsName()
             val projectGroup = project.group.toStringOrEmpty()
             val projectVersion = project.version.toStringOrEmpty()

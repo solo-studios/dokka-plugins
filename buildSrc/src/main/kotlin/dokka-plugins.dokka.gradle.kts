@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file dokka-plugins.dokka.gradle.kts is part of DokkaScriptPlugin
- * Last modified on 15-09-2023 08:24 p.m.
+ * The file dokka-plugins.dokka.gradle.kts is part of dokka-plugins
+ * Last modified on 15-09-2023 09:50 p.m.
  *
  * MIT License
  *
@@ -25,8 +25,6 @@
  * SOFTWARE.
  */
 
-import ca.solostudios.dokkascript.plugin.DokkaScriptsConfiguration
-import ca.solostudios.dokkascript.plugin.DokkaScriptsPlugin
 import java.time.Year
 import org.jetbrains.dokka.DokkaConfiguration.Visibility
 import org.jetbrains.dokka.base.DokkaBase

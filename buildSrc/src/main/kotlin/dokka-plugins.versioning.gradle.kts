@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file dokka-plugins.versioning.gradle.kts is part of DokkaScriptPlugin
- * Last modified on 15-09-2023 08:20 p.m.
+ * The file dokka-plugins.versioning.gradle.kts is part of dokka-plugins
+ * Last modified on 15-09-2023 09:47 p.m.
  *
  * MIT License
  *
