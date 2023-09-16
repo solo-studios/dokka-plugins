@@ -2,7 +2,7 @@
  * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of dokka-plugins
- * Last modified on 15-09-2023 10:05 p.m.
+ * Last modified on 15-09-2023 10:06 p.m.
  *
  * MIT License
  *
@@ -31,7 +31,6 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     // for kotlin-dsl plugin
     gradlePluginPortal()
