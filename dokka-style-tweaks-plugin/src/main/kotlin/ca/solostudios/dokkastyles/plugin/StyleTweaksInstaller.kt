@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file StyleTweaksInstaller.kt is part of dokka-plugins
- * Last modified on 14-09-2023 06:09 p.m.
+ * Last modified on 16-09-2023 04:40 p.m.
  *
  * MIT License
  *
@@ -62,9 +62,6 @@ class StyleTweaksInstaller(private val context: DokkaContext) : PageTransformer 
             emptyList(),
             RenderingStrategy.Write(styleTweaksText),
         )
-
-        println("style tweaks is:")
-        println(styleTweaksText.lines().joinToString("\n") { "|$it" })
 
         return input.let { root ->
             if (context.configuration.delayTemplateSubstitution)
