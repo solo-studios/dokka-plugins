@@ -1,0 +1,33 @@
+[versions]
+kotlin = "1.9.0"
+dokka = "1.8.20"
+axion-release = "1.15.4"
+ksp = "1.9.0-1.0.11"
+ksp-service-annotation = "1.0.4"
+freemarker = "2.3.32"
+
+[plugins]
+## Kotlin Plugins
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+
+## Axion release plugin
+### Gradle release and version management plugin.
+axion-release = { id = "pl.allegro.tech.build.axion-release", version.ref = "axion-release" }
+
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+[libraries]
+## Kotlin stdlib
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+
+## Dokka
+dokka-core = { group = "org.jetbrains.dokka", name = "dokka-core", version.ref = "dokka" }
+dokka-base = { group = "org.jetbrains.dokka", name = "dokka-base", version.ref = "dokka" }
+dokka-test-api = { group = "org.jetbrains.dokka", name = "dokka-test-api", version.ref = "dokka" }
+dokka-test-utils = { group = "org.jetbrains.dokka", name = "dokka-base-test-utils", version.ref = "dokka" }
+
+## KSP Service Annotation
+ksp-service-annotation = { group = "ca.solo-studios", name = "ksp-service-annotation", version.ref = "ksp-service-annotation" }
+
+freemarker = { group = "org.freemarker", name = "freemarker", version.ref = "freemarker" }
