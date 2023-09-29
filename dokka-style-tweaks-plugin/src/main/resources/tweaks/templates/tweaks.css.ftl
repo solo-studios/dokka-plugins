@@ -100,3 +100,21 @@ blockquote, .theme-dark blockquote {
     white-space: pre;
 }
 </#if>
+<#if styles.sidebarWidth??>
+/* Sidebar width */
+:root {
+    --sidebar-width: ${styles.sidebarWidth};
+}
+.sidebar {
+    width: min(var(--sidebar-width), 100%);
+}
+@media (max-width: 759px) {
+    .sidebar {
+        margin-left: calc(-1 * min(var(--sidebar-width), 100%));
+    }
+
+    .sidebar.open ~ #main .menu-toggle {
+        margin-left: min(var(--sidebar-width), 100%);
+    }
+}
+</#if>

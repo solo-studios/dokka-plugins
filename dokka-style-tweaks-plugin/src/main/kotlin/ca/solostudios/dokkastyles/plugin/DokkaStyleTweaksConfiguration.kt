@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file DokkaStyleTweaksConfiguration.kt is part of dokka-plugins
- * Last modified on 15-09-2023 09:39 p.m.
+ * Last modified on 29-09-2023 04:57 p.m.
  *
  * MIT License
  *
@@ -74,7 +74,7 @@ data class DokkaStyleTweaksConfiguration(
     /**
      * The font weight applied to the section tabs (eg. the "Members" tab).
      *
-     * Changes if not null:
+     * Changes if not `null`:
      * - Adds font-weight to the section tabs
      */
     var sectionTabFontWeight: String? = null,
@@ -103,5 +103,11 @@ data class DokkaStyleTweaksConfiguration(
      * - Sets whitespace to pre in code blocks
      */
     var disableCodeWrapping: Boolean = false,
-    // var customHighlightColour: Boolean = false,
+    /**
+     * The width of the sidebar.
+     *
+     * Changes if not `null`:
+     * - Overrides the width of the sidebar
+     */
+    var sidebarWidth: String? = null,
 ) : ConfigurableBlock
