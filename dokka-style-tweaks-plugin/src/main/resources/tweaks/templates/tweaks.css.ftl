@@ -4,14 +4,27 @@
 /* Minimal scrollbar */
 html {
     scrollbar-width: auto;
-    scrollbar-gutter: stable;
-}
-:root.theme-dark {
-    --color-scrollbar: hsla(0, 0%, 100%, 0.4);
-    --color-scrollbar-track: transparent;
 }
 :root {
     --color-scrollbar-track: transparent;
+}
+:root.theme-dark {
+    --color-scrollbar: hsla(0, 0%, 100%, 0.4);
+}
+html ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+html ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    background-color: #909090;
+}
+
+html ::-webkit-scrollbar-thumb:active {
+    background-color: #606060;
 }
 </#if>
 <#if styles.darkPurpleHighlight>
