@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file dokka-plugins.compilation.gradle.kts is part of dokka-plugins
- * Last modified on 15-09-2023 11:02 p.m.
+ * Last modified on 15-08-2024 04:00 p.m.
  *
  * MIT License
  *
@@ -35,10 +35,10 @@ kotlin {
             kotlinOptions {
                 apiVersion = "1.8"
                 languageVersion = "1.8"
+                jvmTarget = "1.8"
             }
         }
     }
-    jvmToolchain(8)
 }
 
 java {

@@ -2,7 +2,7 @@
  * Copyright (c) 2024-2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Jenkinsfile is part of dokka-plugins
- * Last modified on 15-08-2024 03:59 p.m.
+ * Last modified on 15-08-2024 04:00 p.m.
  *
  * MIT License
  *
@@ -29,7 +29,7 @@ pipeline {
     agent any
 
     tools {
-        jdk 'Temurin Java 8'
+        jdk 'Temurin Java 17'
     }
 
     triggers {
