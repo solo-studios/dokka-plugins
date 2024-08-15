@@ -2,7 +2,7 @@
  * Copyright (c) 2024-2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Jenkinsfile is part of dokka-plugins
- * Last modified on 15-08-2024 04:00 p.m.
+ * Last modified on 15-08-2024 04:36 p.m.
  *
  * MIT License
  *
@@ -34,6 +34,10 @@ pipeline {
 
     triggers {
         githubPush()
+    }
+
+    enviroment {
+        ORG_GRADLE_PROJECT_release.forceSnapshot = true
     }
 
     stages {
