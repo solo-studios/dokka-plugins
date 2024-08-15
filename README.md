@@ -1,5 +1,10 @@
 # Dokka Plugins
 
+[![Build Status](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fci.solo-studios.ca%2Fjob%2Fsolo-studios%2Fjob%2Fdokka-plugins%2Fjob%2Fmaster%2F&style=for-the-badge)](https://ci.solo-studios.ca/job/solo-studios/job/dokka-plugins/job/master/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg?style=for-the-badge)](https://kotlinlang.org/)
+[![Discord Server](https://img.shields.io/discord/871114669761372221?color=7389D8&label=Discord&logo=discord&logoColor=8fa3ff&style=for-the-badge)](https://discord.solo-studios.ca)
+
 A collection of misc. plugins for dokka that add a few useful things.
 
 ## Dokka Script Plugin
