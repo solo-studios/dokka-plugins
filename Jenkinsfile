@@ -2,7 +2,7 @@
  * Copyright (c) 2024-2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Jenkinsfile is part of dokka-plugins
- * Last modified on 15-08-2024 04:44 p.m.
+ * Last modified on 15-08-2024 04:47 p.m.
  *
  * MIT License
  *
@@ -36,10 +36,6 @@ pipeline {
         githubPush()
     }
 
-    environment {
-        ORG_GRADLE_PROJECT_release.forceSnapshot = true
-    }
-
     stages {
         stage('Setup Gradle') {
             steps {
@@ -51,7 +47,9 @@ pipeline {
         stage('Build dokka-script-plugin') {
             steps {
                 withGradle {
-                    sh './gradlew :dokka-script-plugin:build'
+                    withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot = true']) {
+                        sh './gradlew :dokka-script-plugin:build'
+                    }
                 }
             }
 
@@ -67,7 +65,9 @@ pipeline {
         stage('Build dokka-style-tweaks-plugin') {
             steps {
                 withGradle {
-                    sh './gradlew :dokka-style-tweaks-plugin:build'
+                    withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot = true']) {
+                        sh './gradlew :dokka-style-tweaks-plugin:build'
+                    }
                 }
             }
 
@@ -99,7 +99,9 @@ pipeline {
                         )
                 ]) {
                     withGradle {
-                        sh './gradlew publishAllPublicationsToSoloStudiosRepository'
+                        withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot = true']) {
+                            sh './gradlew publishAllPublicationsToSoloStudiosRepository'
+                        }
                     }
                 }
             }
