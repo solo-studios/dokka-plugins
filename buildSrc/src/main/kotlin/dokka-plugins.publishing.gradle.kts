@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file dokka-plugins.publishing.gradle.kts is part of dokka-plugins
- * Last modified on 15-09-2023 09:47 p.m.
+ * Last modified on 15-08-2024 03:56 p.m.
  *
  * MIT License
  *
@@ -116,10 +116,20 @@ afterEvaluate {
         val signingKey: String? by project
         val signingKeyId: String? by project
         val signingPassword: String? by project
-        if (signingKey != null && signingKeyId != null && signingPassword != null)
-            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-        else
-            useGpgCmd()
+
+        when {
+            signingKey != null && signingKeyId != null && signingPassword != null -> {
+                useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+            }
+
+            signingKey != null && signingPassword != null                         -> {
+                useInMemoryPgpKeys(signingKey, signingPassword)
+            }
+
+            else                                                                  -> {
+                useGpgCmd()
+            }
+        }
         sign(publishing.publications)
     }
 }
