@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file dokka-plugins.tasks.gradle.kts is part of dokka-plugins
- * Last modified on 15-09-2023 11:05 p.m.
+ * Last modified on 07-02-2025 05:19 p.m.
  *
  * MIT License
  *
@@ -26,7 +26,6 @@
  */
 
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     kotlin("jvm")
@@ -53,28 +52,5 @@ tasks {
 
     named<Task>("build") {
         dependsOn(withType<Jar>())
-    }
-
-    val dokkaHtml by named<DokkaTask>("dokkaHtml")
-
-    val jar by named<Jar>("jar")
-
-    val javadocJar by named<Jar>("javadocJar") {
-        dependsOn(dokkaHtml)
-        from(dokkaHtml.outputDirectory)
-        archiveClassifier = "javadoc"
-        group = JavaBasePlugin.DOCUMENTATION_GROUP
-    }
-
-    val sourcesJar by named<Jar>("sourcesJar") {
-        from(sourceSets["main"].allSource)
-        archiveClassifier = "sources"
-        group = JavaBasePlugin.DOCUMENTATION_GROUP
-    }
-
-    artifacts {
-        archives(jar)
-        archives(sourcesJar)
-        archives(javadocJar)
     }
 }

@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file DokkaStyleTweaksConfiguration.kt is part of dokka-plugins
- * Last modified on 29-09-2023 04:57 p.m.
+ * Last modified on 08-02-2025 02:58 p.m.
  *
  * MIT License
  *
@@ -110,4 +110,21 @@ data class DokkaStyleTweaksConfiguration(
      * - Overrides the width of the sidebar
      */
     var sidebarWidth: String? = null,
+    /**
+     * Makes the entire sidebar row be highlighted on over.
+     *
+     * Changes if enabled:
+     * - When hovering over a sidebar row, the entire row is highlighted
+     */
+    var sidebarFullRowHover: Boolean = false,
+    /**
+     * Makes the sidebar more compact.
+     *
+     * Changes if enabled:
+     * - Decreases the font size of the sidebar from 13px to 12px
+     * - Decreases the line height of the sidebar from 24px to 16px
+     * - Decreases padding between sidebar rows
+     * - Decreases padding on the left side of each sidebar row
+     */
+    var compactSidebar: Boolean = false,
 ) : ConfigurableBlock

@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file build.gradle.kts is part of DokkaScriptPlugin
- * Last modified on 14-09-2023 02:38 p.m.
+ * The file build.gradle.kts is part of dokka-plugins
+ * Last modified on 06-03-2025 06:13 p.m.
  *
  * MIT License
  *
@@ -26,19 +26,20 @@
  */
 
 plugins {
+    `dokka-plugins`.versioning
     `dokka-plugins`.repositories
     `dokka-plugins`.compilation
     `dokka-plugins`.ksp.service
     `dokka-plugins`.tasks
     `dokka-plugins`.publishing
     `dokka-plugins`.dokka
-    `dokka-plugins`.versioning
 }
 
-group = "ca.solo-studios"
-description = """
-    A dokka plugin that allows adding custom scripts.
-""".trimIndent()
+nyx.info {
+    description = """
+        A dokka plugin that allows adding custom scripts.
+    """.trimIndent()
+}
 
 dependencies {
     implementation(libs.kotlin.stdlib)

@@ -1,15 +1,18 @@
 [versions]
-kotlin = "1.9.0"
-dokka = "1.8.20"
-axion-release = "1.17.2"
-ksp = "1.9.0-1.0.11"
-ksp-service-annotation = "1.0.4"
-freemarker = "2.3.32"
+kotlin = "2.1.10"
+dokka = "2.0.0"
+axion-release = "1.18.16"
+nyx = "0.3.0-SNAPSHOT"
+ksp = "2.1.10-1.0.31"
+ksp-service-annotation = "1.0.8"
+freemarker = "2.3.34"
 
 [plugins]
 ## Kotlin Plugins
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+
+nyx = { id = "ca.solo-studios.nyx", version.ref = "nyx" }
 
 ## Axion release plugin
 ### Gradle release and version management plugin.

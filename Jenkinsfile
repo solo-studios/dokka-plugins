@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2024-2024 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2024-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file Jenkinsfile is part of dokka-plugins
- * Last modified on 15-08-2024 04:47 p.m.
+ * Last modified on 06-03-2025 07:52 p.m.
  *
  * MIT License
  *
@@ -47,7 +47,7 @@ pipeline {
         stage('Build dokka-script-plugin') {
             steps {
                 withGradle {
-                    withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot = true']) {
+                    withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot=true']) {
                         sh './gradlew :dokka-script-plugin:build'
                     }
                 }
@@ -65,7 +65,7 @@ pipeline {
         stage('Build dokka-style-tweaks-plugin') {
             steps {
                 withGradle {
-                    withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot = true']) {
+                    withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot=true']) {
                         sh './gradlew :dokka-style-tweaks-plugin:build'
                     }
                 }
@@ -82,9 +82,7 @@ pipeline {
 
         stage('Deploy to Snapshots Repositories') {
             when {
-                not {
-                    buildingTag()
-                }
+                not { buildingTag() }
             }
 
             steps {
@@ -94,18 +92,17 @@ pipeline {
                         string(credentialsId: 'maven-signing-key-password', variable: 'ORG_GRADLE_PROJECT_signingPassword'),
                         usernamePassword(
                                 credentialsId: 'solo-studios-maven',
-                                passwordVariable: 'ORG_GRADLE_PROJECT_SoloStudiosPassword',
-                                usernameVariable: 'ORG_GRADLE_PROJECT_SoloStudiosUsername'
+                                passwordVariable: 'ORG_GRADLE_PROJECT_SoloStudiosSnapshotsPassword',
+                                usernameVariable: 'ORG_GRADLE_PROJECT_SoloStudiosSnapshotsUsername'
                         )
                 ]) {
                     withGradle {
-                        withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot = true']) {
-                            sh './gradlew publishAllPublicationsToSoloStudiosRepository'
+                        withEnv(['ORG_GRADLE_PROJECT_release.forceSnapshot=true']) {
+                            sh './gradlew publishAllPublicationsToSoloStudiosSnapshotsRepository'
                         }
                     }
                 }
             }
-
         }
     }
 

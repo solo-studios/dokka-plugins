@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of dokka-plugins
- * Last modified on 15-09-2023 10:06 p.m.
+ * Last modified on 06-03-2025 08:16 p.m.
  *
  * MIT License
  *
@@ -25,6 +25,8 @@
  * SOFTWARE.
  */
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     `kotlin-dsl`
@@ -34,6 +36,13 @@ repositories {
     mavenCentral()
     // for kotlin-dsl plugin
     gradlePluginPortal()
+
+    maven("https://maven.solo-studios.ca/releases/") {
+        name = "Solo Studios"
+    }
+    maven("https://maven.solo-studios.ca/snapshots/") {
+        name = "Solo Studios"
+    }
 }
 
 java {
@@ -42,14 +51,10 @@ java {
 }
 
 kotlin {
-    target {
-        compilations.configureEach {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_17.toString()
-                languageVersion = "1.8"
-                apiVersion = "1.8"
-            }
-        }
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
+        languageVersion = KotlinVersion.KOTLIN_2_0
+        apiVersion = KotlinVersion.KOTLIN_2_0
     }
 }
 
@@ -62,6 +67,8 @@ dependencies {
     implementation(gradlePlugin(libs.plugins.ksp, libs.versions.ksp.asProvider()))
 
     implementation(gradlePlugin(libs.plugins.axion.release, libs.versions.axion.release))
+
+    implementation(gradlePlugin(libs.plugins.nyx, libs.versions.nyx))
 
     // https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))

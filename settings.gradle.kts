@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023-2023 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file settings.gradle.kts is part of dokka-plugins
- * Last modified on 15-09-2023 09:46 p.m.
+ * Last modified on 07-02-2025 05:04 p.m.
  *
  * MIT License
  *
@@ -27,6 +27,8 @@
 
 pluginManagement {
     repositories {
+        maven("https://maven.solo-studios.ca/releases")
+        maven("https://maven.solo-studios.ca/snapshots")
         mavenCentral()
         gradlePluginPortal()
     }

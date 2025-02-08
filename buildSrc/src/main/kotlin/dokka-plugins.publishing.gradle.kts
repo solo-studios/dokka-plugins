@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2023-2024 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file dokka-plugins.publishing.gradle.kts is part of dokka-plugins
- * Last modified on 15-08-2024 03:56 p.m.
+ * Last modified on 06-03-2025 07:59 p.m.
  *
  * MIT License
  *
@@ -28,60 +28,30 @@
 plugins {
     signing
     `maven-publish`
+    id("pl.allegro.tech.build.axion-release")
+    id("ca.solo-studios.nyx")
 }
 
-afterEvaluate {
-    publishing {
-        publications.create<MavenPublication>("maven") {
-            from(components["java"])
+nyx {
+    info {
+        group = "ca.solo-studios"
 
-            val projectName = project.name.formatAsName()
-            val projectGroup = project.group.toStringOrEmpty()
-            val projectVersion = project.version.toStringOrEmpty()
-            val projectDescription = project.description.toStringOrEmpty()
-            val projectUrl = project.repository.projectUrl
-            val projectBaseUri = project.repository.projectBaseUri
+        organizationUrl = "https://solo-studios.ca/"
+        organizationName = "Solo Studios"
 
-            val licenseName = "MIT"
-            val licenseUrl = "https://mit-license.org/"
-
-            groupId = projectGroup
-            // This breaks shit (don't do it)
-            // artifactId = project.name
-            version = projectVersion
-
-            pom {
-                name = projectName
-                description = projectDescription
-                url = projectUrl
-
-                inceptionYear = "2023"
-
-                licenses {
-                    license {
-                        name = licenseName
-                        url = licenseUrl
-                    }
-                }
-                developers {
-                    developer {
-                        id = "solonovamax"
-                        name = "solonovamax"
-                        email = "solonovamax@12oclockpoint.com"
-                        url = "https://solonovamax.gay/"
-                    }
-                }
-                issueManagement {
-                    system = "GitHub"
-                    url = "$projectUrl/issues"
-                }
-                scm {
-                    connection = "scm:git:$projectUrl.git"
-                    developerConnection = "scm:git:ssh://$projectBaseUri.git"
-                    url = projectUrl
-                }
-            }
+        developer {
+            id = "solonovamax"
+            name = "solonovamax"
+            email = "solonovamax@12oclockpoint.com"
+            url = "https://solonovamax.gay"
         }
+
+        repository.fromGithub("solo-studios", "dokka-plugins")
+        license.useMIT()
+    }
+
+    publishing {
+        withSignedPublishing()
 
         repositories {
             maven {
@@ -89,7 +59,6 @@ afterEvaluate {
 
                 val repositoryId: String? by project
                 url = when {
-                    isSnapshot           -> uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
                     repositoryId != null -> uri("https://s01.oss.sonatype.org/service/local/staging/deployByRepositoryId/$repositoryId/")
                     else                 -> uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                 }
@@ -97,11 +66,19 @@ afterEvaluate {
                 credentials(PasswordCredentials::class)
             }
             maven {
-                name = "SoloStudios"
+                name = "SoloStudiosReleases"
 
-                val releasesUrl = uri("https://maven.solo-studios.ca/releases/")
-                val snapshotUrl = uri("https://maven.solo-studios.ca/snapshots/")
-                url = if (isSnapshot) snapshotUrl else releasesUrl
+                url = uri("https://maven.solo-studios.ca/releases/")
+
+                credentials(PasswordCredentials::class)
+                authentication { // publishing doesn't work without this for some reason
+                    create<BasicAuthentication>("basic")
+                }
+            }
+            maven {
+                name = "SoloStudiosSnapshots"
+
+                url = uri("https://maven.solo-studios.ca/snapshots/")
 
                 credentials(PasswordCredentials::class)
                 authentication { // publishing doesn't work without this for some reason
@@ -109,27 +86,5 @@ afterEvaluate {
                 }
             }
         }
-    }
-
-    signing {
-        // Allow specifying the key, key id, and password via environment variables.
-        val signingKey: String? by project
-        val signingKeyId: String? by project
-        val signingPassword: String? by project
-
-        when {
-            signingKey != null && signingKeyId != null && signingPassword != null -> {
-                useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-            }
-
-            signingKey != null && signingPassword != null                         -> {
-                useInMemoryPgpKeys(signingKey, signingPassword)
-            }
-
-            else                                                                  -> {
-                useGpgCmd()
-            }
-        }
-        sign(publishing.publications)
     }
 }
