@@ -2,7 +2,7 @@
  * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file dokka-plugins.compilation.gradle.kts is part of dokka-plugins
- * Last modified on 06-03-2025 08:28 p.m.
+ * Last modified on 06-03-2025 10:49 p.m.
  *
  * MIT License
  *
@@ -41,7 +41,8 @@ nyx {
         distributeLicense = true
         buildDependsOnJar = true
         reproducibleBuilds = true
-        jvmToolchain = 8
+        jvmToolchain = 17
+        jvmTarget = 8
 
         kotlin {
             apiVersion = "2.0"

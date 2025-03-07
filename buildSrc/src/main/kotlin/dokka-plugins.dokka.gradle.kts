@@ -2,7 +2,7 @@
  * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file dokka-plugins.dokka.gradle.kts is part of dokka-plugins
- * Last modified on 06-03-2025 08:33 p.m.
+ * Last modified on 06-03-2025 08:49 p.m.
  *
  * MIT License
  *
@@ -74,7 +74,9 @@ dokka {
 
         sourceLink {
             localDirectory = projectDir.resolve("src")
-            remoteUrl = nyx.info.repository.projectUrl.map { uri("$it/blob/${scmVersion.scmPosition.revision}/src") }
+            remoteUrl = nyx.info.repository.projectUrl.map {
+                uri("$it/blob/${scmVersion.scmPosition.revision}/${projectDir.relativeTo(rootDir).invariantSeparatorsPath}/src")
+            }
             remoteLineSuffix = "#L"
         }
     }
