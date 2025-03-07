@@ -2,7 +2,7 @@
  * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of dokka-plugins
- * Last modified on 06-03-2025 08:28 p.m.
+ * Last modified on 06-03-2025 11:35 p.m.
  *
  * MIT License
  *
@@ -69,6 +69,8 @@ dependencies {
     implementation(gradlePlugin(libs.plugins.axion.release, libs.versions.axion.release))
 
     implementation(gradlePlugin(libs.plugins.nyx, libs.versions.nyx))
+
+    implementation(gradlePlugin(libs.plugins.sass.base, libs.versions.freefair.sass))
 
     // https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))

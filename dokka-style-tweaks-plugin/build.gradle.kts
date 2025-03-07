@@ -2,7 +2,7 @@
  * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of dokka-plugins
- * Last modified on 06-03-2025 08:28 p.m.
+ * Last modified on 06-03-2025 11:35 p.m.
  *
  * MIT License
  *
@@ -52,4 +52,8 @@ dependencies {
     testImplementation(kotlin("test-junit"))
     testImplementation(libs.dokka.test.api)
     testImplementation(libs.dokka.test.utils)
+}
+
+dokka.pluginsConfiguration.html {
+    customAssets.from(fileTree(rootDir.resolve("assets")))
 }

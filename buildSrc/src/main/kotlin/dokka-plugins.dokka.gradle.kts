@@ -2,7 +2,7 @@
  * Copyright (c) 2023-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file dokka-plugins.dokka.gradle.kts is part of dokka-plugins
- * Last modified on 06-03-2025 08:49 p.m.
+ * Last modified on 06-03-2025 11:35 p.m.
  *
  * MIT License
  *
@@ -25,7 +25,12 @@
  * SOFTWARE.
  */
 
+import com.sass_lang.embedded_protocol.OutputStyle
+import groovy.text.SimpleTemplateEngine
+import io.freefair.gradle.plugins.sass.SassCompile
+import java.io.StringWriter
 import java.time.Year
+import org.apache.tools.ant.filters.ReplaceTokens
 import org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier
 import org.jetbrains.dokka.gradle.tasks.DokkaGenerateTask
 
@@ -33,6 +38,7 @@ plugins {
     id("org.jetbrains.dokka")
     id("ca.solo-studios.nyx")
     id("pl.allegro.tech.build.axion-release")
+    id("io.freefair.sass-base")
 }
 
 nyx {
@@ -41,11 +47,20 @@ nyx {
     }
 }
 
+sass {
+    omitSourceMapUrl = true
+    outputStyle = OutputStyle.COMPRESSED
+    sourceMapContents = false
+    sourceMapEmbed = false
+    sourceMapEnabled = false
+}
+
 val rootDokkaDirectory = rootProject.projectDir.resolve("dokka")
 val dokkaDirectories = if (project.rootProject != project)
     listOf(rootDokkaDirectory, project.projectDir.resolve("dokka"))
 else
     listOf(rootDokkaDirectory)
+val dokkaBuildDir = dokka.basePublicationsDirectory
 
 val processDokkaIncludes by tasks.register<ProcessResources>("processDokkaIncludes") {
     val projectInfo = mapOf(
@@ -57,11 +72,24 @@ val processDokkaIncludes by tasks.register<ProcessResources>("processDokkaInclud
     inputs.properties(projectInfo)
 
     from(dokkaDirectories.map { it.resolve("includes") }) {
-        expand("project" to projectInfo)
+        exclude { it.name.startsWith("_") }
+
+        val dependencyInformation = processTemplate(rootDokkaDirectory.resolve("includes/_dependency.md"), mapOf("project" to projectInfo))
+        filter<ReplaceTokens>(
+                "tokens" to mapOf("dependencies" to dependencyInformation),
+                "beginToken" to "{{",
+                "endToken" to "}}"
+                             )
     }
 
-    into(layout.buildDirectory.file("dokka/includes"))
+    into(dokkaBuildDir.dir("includes"))
     group = JavaBasePlugin.DOCUMENTATION_GROUP
+}
+
+val compileDokkaSass by tasks.registering(SassCompile::class) {
+    group = BasePlugin.BUILD_GROUP
+    source = fileTree(rootDokkaDirectory.resolve("styles"))
+    destinationDir = dokkaBuildDir.dir("styles")
 }
 
 dokka {
@@ -86,14 +114,26 @@ dokka {
             homepageLink = nyx.info.repository.projectUrl
             footerMessage = "© ${Year.now()} Copyright solo-studios"
             separateInheritedMembers = false
+            customStyleSheets.from(fileTree(compileDokkaSass.flatMap { it.destinationDir }))
         }
     }
 }
 
 tasks {
     withType<DokkaGenerateTask>().configureEach {
-        inputs.files(dokkaDirectories)
+        inputs.files(dokkaBuildDir.dir("styles"), dokkaDirectories)
 
-        dependsOn(processDokkaIncludes)
+        dependsOn(compileDokkaSass, processDokkaIncludes)
     }
+}
+
+fun processTemplate(templateFile: File, templateProperties: Map<String, Any?>): String {
+    val engine = SimpleTemplateEngine()
+    val template = engine.createTemplate(templateFile)
+    val writer = StringWriter()
+
+    // SimpleTemplateEngine expects to be able to mutate the map internally.
+    template.make(templateProperties.toMutableMap())
+            .writeTo(writer)
+    return writer.toString()
 }

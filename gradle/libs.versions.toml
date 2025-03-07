@@ -6,6 +6,7 @@ nyx = "0.3.0-SNAPSHOT"
 ksp = "2.1.10-1.0.31"
 ksp-service-annotation = "1.0.8"
 freemarker = "2.3.34"
+freefair-sass = "8.10.2"
 
 [plugins]
 ## Kotlin Plugins
@@ -19,6 +20,8 @@ nyx = { id = "ca.solo-studios.nyx", version.ref = "nyx" }
 axion-release = { id = "pl.allegro.tech.build.axion-release", version.ref = "axion-release" }
 
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+sass-base = { id = "io.freefair.sass-base", version.ref = "freefair-sass" }
 
 [libraries]
 ## Kotlin stdlib
